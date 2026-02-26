@@ -1,0 +1,7 @@
+export { default as Dashboard } from './Dashboard'
+export { default as Analytics } from './Analytics'
+export { default as HRKPIView } from './HRKPIView'
+export { default as CottonMixingView } from './CottonMixingView'
+export { default as EnergyManagementView } from './EnergyManagementView'
+export { default as MaintenanceView } from './MaintenanceView'
+export { default as QualityManagementView } from './QualityManagementView'

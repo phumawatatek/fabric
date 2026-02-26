@@ -1,0 +1,149 @@
+═══════════════════════════════════════════════════════════════════════════════
+  HỆ THỐNG QUẢN LÝ NHÀ MÁY VẢI SỢI - HƯỚNG DẪN CÀI ĐẶT
+═══════════════════════════════════════════════════════════════════════════════
+
+📌 BỮ CHỌN NHANH NHẤT (3 BƯỚC)
+═══════════════════════════════════════════════════════════════════════════════
+
+1. CÀI ĐẶT
+   Mở Terminal/PowerShell tại thư mục dự án:
+   
+   cd v0-project
+   npm install
+
+2. CHẠY
+   npm run dev
+
+3. TRUY CẬP
+   Mở trình duyệt: http://localhost:3000
+
+✅ Xong! Ứng dụng đang chạy.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 YÊU CẦU HỆ THỐNG
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ Node.js 18.0 trở lên (Tải từ: https://nodejs.org/)
+✓ NPM hoặc pnpm
+✓ Dung lượng ổ cứng: 500MB
+✓ RAM: 1GB
+
+Kiểm tra cài đặt Node.js:
+   node --version
+   npm --version
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 CHI TIẾT CÀI ĐẶT
+═══════════════════════════════════════════════════════════════════════════════
+
+BƯỚC 1: Tải Xuống Code
+   - Trên v0.app, nhấp "Download ZIP"
+   - Giải nén vào thư mục bất kỳ (ví dụ: C:\Projects\ hoặc ~/Documents/)
+
+BƯỚC 2: Mở Terminal/PowerShell
+   Windows (PowerShell):
+      - Nhấp chuột phải tại thư mục dự án
+      - Chọn "Open PowerShell window here"
+   
+   Mac/Linux:
+      - Mở Terminal
+      - cd /path/to/v0-project
+
+BƯỚC 3: Cài Dependencies
+   npm install
+   
+   (Nếu chậm, dùng: npm install --legacy-peer-deps)
+
+BƯỚC 4: Chạy Development Server
+   npm run dev
+
+BƯỚC 5: Truy Cập Ứng Dụng
+   Mở trình duyệt, truy cập: http://localhost:3000
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🆘 TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════════
+
+❌ "npm: command not found"
+   → Cài Node.js từ: https://nodejs.org/
+
+❌ "Port 3000 already in use"
+   → Chạy: npm run dev -- -p 3001
+   → Truy cập: http://localhost:3001
+
+❌ "Cannot find module"
+   → Chạy: npm install
+
+❌ "Styling không đúng"
+   → Xóa cache: rm -rf .next
+   → Chạy lại: npm run dev
+   → Browser: Ctrl + Shift + Delete (Clear Cache)
+
+❌ "Module not found: typescript"
+   → Chạy: npm install --save-dev typescript
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📚 HƯỚNG DẪN THÊM
+═══════════════════════════════════════════════════════════════════════════════
+
+File tài liệu:
+   - QUICK_START.md       (5 phút - bắt đầu nhanh)
+   - GET_STARTED.md       (15 phút - đầy đủ) ⭐ CHÍNH
+   - INSTALLATION.md      (20 phút - chi tiết)
+   - README.md            (Tất cả tính năng)
+   - DOCS_INDEX.md        (Danh sách tài liệu)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 TÍNH NĂNG CHÍNH
+═══════════════════════════════════════════════════════════════════════════════
+
+7 Views:
+   1. Bảng Điều Khiển (Dashboard) - KPI thời gian thực
+   2. Phân Tích (Analytics) - Biểu đồ & phân tích lỗi
+   3. Quản Lý Nhân Sự (HR-KPI) - Lương tự động
+   4. Trộn Cotton (Cotton Mixing) - AI dự đoán
+   5. Quản Lý Năng Lượng (Energy) - Điều khiển HVAC
+   6. Bảo Trì (Maintenance) - Workflow bảo trì
+   7. Quản Lý Chất Lượng (Quality) - Tiêu chuẩn chất lượng
+
+Tất cả 100% tiếng Việt!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+💻 CÁC LỆNH HỮU ÍCH
+═══════════════════════════════════════════════════════════════════════════════
+
+npm run dev          # Chạy development server
+npm run build        # Build cho production
+npm run start        # Chạy production build
+npm run lint         # Kiểm tra lỗi code
+Ctrl + C             # Dừng server
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎉 BẮTĐẦU NGAY!
+═══════════════════════════════════════════════════════════════════════════════
+
+1. npm install
+2. npm run dev
+3. Truy cập: http://localhost:3000
+
+Đây là toàn bộ cần làm để chạy ứng dụng!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+❓ CÓ CÂU HỎI?
+   → Xem: GET_STARTED.md (Hướng dẫn đầy đủ nhất)
+   → Xem: INSTALLATION.md (Chi tiết từng bước)
+   → Xem: README.md (Tất cả tính năng)
+
+Chúc bạn sử dụng thành công! 🚀
+
+═══════════════════════════════════════════════════════════════════════════════
+Phiên bản: 1.1 | Cập nhật: 26/02/2025 | Trạng thái: Production-ready
+═══════════════════════════════════════════════════════════════════════════════

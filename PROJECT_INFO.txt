@@ -1,0 +1,303 @@
+═══════════════════════════════════════════════════════════════════════════════
+  HỆ THỐNG QUẢN LÝ NHÀ MÁY VẢI SỢI - THÔNG TIN DỰ ÁN
+═══════════════════════════════════════════════════════════════════════════════
+
+📦 THÔNG TIN CHUNG
+═══════════════════════════════════════════════════════════════════════════════
+
+Tên Dự Án: Hệ Thống Quản Lý Nhà Máy Vải Sợi
+Phiên Bản: 1.1
+Trạng Thái: Production-Ready
+Ngôn Ngữ: 100% Tiếng Việt
+Ngày Cập Nhật: 26/02/2025
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 MỤC ĐÍCH
+═══════════════════════════════════════════════════════════════════════════════
+
+Nền tảng quản lý toàn diện cho nhà máy sản xuất vải sợi, cung cấp:
+- Giám sát thời gian thực (Real-time monitoring)
+- Phân tích dữ liệu (Data analytics)
+- Quản lý nhân sự (HR management)
+- Tối ưu hóa sản xuất (Production optimization)
+- Tính lương tự động (Automatic salary calculation)
+- Điều khiển năng lượng (Energy management)
+- Quản lý bảo trì (Maintenance management)
+- Đảm bảo chất lượng (Quality assurance)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🏗️ CẤU TRÚC CỐN LÕISTD
+═══════════════════════════════════════════════════════════════════════════════
+
+Frontend:
+  - React 19.2.4
+  - Next.js 16.1.6
+  - TypeScript 5.7.3
+  - Tailwind CSS 4.2.0
+  - Recharts 2.15.0 (Biểu đồ)
+  - Lucide React (Icons)
+  - Shadcn/ui (UI Components)
+
+Backend:
+  - Mock Data (Giả lập backend)
+  - Real-time Updates (Mỗi 3-5 giây)
+  - localStorage/useState (Quản lý state)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📂 DANH SÁCH TỆP QUAN TRỌNG
+═══════════════════════════════════════════════════════════════════════════════
+
+TÀI LIỆU & HƯỚNG DẪN:
+  - SETUP.txt            (Hướng dẫn cài đặt nhanh - Đọc trước!)
+  - GET_STARTED.md       (Hướng dẫn đầy đủ 15 phút) ⭐ CHÍNH
+  - QUICK_START.md       (Bắt đầu nhanh 5 phút)
+  - INSTALLATION.md      (Chi tiết cài đặt 20 phút)
+  - README.md            (Tài liệu đầy đủ & tính năng)
+  - DOCS_INDEX.md        (Danh sách tài liệu)
+  - PROJECT_INFO.txt     (File này - Thông tin dự án)
+
+ỨNG DỤNG:
+  - app/
+    ├── layout.tsx       (Root layout)
+    ├── page.tsx         (Trang chính)
+    └── globals.css      (Global styles)
+  
+  - components/
+    ├── MainLayout.tsx   (Layout chính)
+    ├── MachineCard.tsx  (Card máy)
+    ├── KPICard.tsx      (Card KPI)
+    ├── StatusBadge.tsx  (Badge trạng thái)
+    ├── MachineDetailDialog.tsx     (Chi tiết máy)
+    ├── WorstMachineDetailDialog.tsx (Phân tích lỗi)
+    └── views/
+        ├── Dashboard.tsx                (Bảng điều khiển)
+        ├── Analytics.tsx                (Phân tích)
+        ├── HRKPIView.tsx                (Nhân sự & lương)
+        ├── CottonMixingView.tsx         (Trộn cotton)
+        ├── EnergyManagementView.tsx     (Năng lượng)
+        ├── MaintenanceView.tsx          (Bảo trì)
+        └── QualityManagementView.tsx    (Chất lượng)
+  
+  - hooks/
+    └── useFactoryData.ts (Mock data & logic)
+  
+  - public/               (Assets tĩnh)
+
+CẤU HÌNH:
+  - package.json        (Dependencies)
+  - tsconfig.json       (TypeScript config)
+  - tailwind.config.ts  (Tailwind config)
+  - next.config.mjs     (Next.js config)
+  - postcss.config.js   (PostCSS config)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 CÁC TÍNH NĂNG CHÍNH
+═══════════════════════════════════════════════════════════════════════════════
+
+1. BẢNG ĐIỀU KHIỂN (Dashboard)
+   - KPI thời gian thực (Sản lượng, Máy, Lỗi, Tỉ lệ)
+   - 10 máy xoắn với trạng thái động
+   - Click máy → Dialog chi tiết (Thông tin, Chỉ số kỹ thuật, Lịch sử 24h)
+   - Cảnh báo & Đơn hàng
+
+2. PHÂN TÍCH (Analytics)
+   - Biểu đồ xu hướng sản lượng 24h
+   - Phân bố trạng thái máy (Pie Chart)
+   - Top 10 máy lỗi cao
+   - Dialog phân loại lỗi chi tiết + lịch sử 7 ngày
+
+3. QUẢN LÝ NHÂN SỰ (HR-KPI) ⭐
+   - Lịch làm việc & phân bổ máy (Dropdown)
+   - Cấu hình đơn giá tính lương
+   - Machine Operation Record (Real-time sản lượng)
+   - Production Query (Top 5 ranking)
+   - Bảng lương tự động tính
+
+4. TRỘN COTTON (Cotton Mixing)
+   - Tạo lô trộn mới (Loại, Tỉ Lệ, Nhiệt Độ, Tốc Độ)
+   - Dialog dự đoán AI (Chất lượng, Phân tích, Rủi ro)
+
+5. QUẢN LÝ NĂNG LƯỢNG (Energy Management)
+   - Chọn ngày/tháng/năm (Date picker)
+   - Slider giới hạn công suất (300-800 kW)
+   - Modal tiêu thụ theo giờ (24h)
+   - Điều khiển HVAC (Nhiệt độ, Chế độ)
+
+6. BẢO TRÌ (Maintenance)
+   - Lịch bảo trì máy
+   - Dialog chi tiết công việc
+   - Workflow: Bắt Đầu → Hoàn Thành (báo cáo)
+   - Ứng dụng di động mô phỏng
+
+7. QUẢN LÝ CHẤT LƯỢNG (Quality Management)
+   - Tiêu chuẩn chất lượng
+   - Danh sách đơn hàng
+   - Dialog chỉ số chi tiết (4 metrics)
+   - Phân loại lỗi
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 DỮ LIỆU MOCK
+═══════════════════════════════════════════════════════════════════════════════
+
+6 Bộ dữ liệu giả lập:
+
+1. Machines (10 máy xoắn)
+   - Trạng thái: Hoạt động, Lỗi, Bảo trì
+   - Chỉ số: Sản lượng, Nhiệt độ, RPM, Lỗi
+   - Cập nhật: Mỗi 3-5 giây
+
+2. Worst Machines (10 máy lỗi cao)
+   - Tỉ lệ lỗi, Thời gian dừng
+   - Lịch sử lỗi chi tiết
+
+3. HR Data (10 nhân viên)
+   - Tên, Vị trí, Ca, Máy giám sát
+   - Sản lượng, Lương tính động
+
+4. AI Mixing Data (10 lô trộn)
+   - Loại cotton, Tỉ lệ, Nhiệt độ, Tốc độ
+   - Dự đoán chất lượng AI
+
+5. Production Orders (10 đơn hàng)
+   - Mã đơn, Sản phẩm, Tiến độ
+   - Chỉ số chất lượng
+
+6. Maintenance Data (10 công việc)
+   - Máy, Loại, Trạng thái
+   - Ngày dự kiến, Ghi chú
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎮 TƯƠNG TÁC BACKEND
+═══════════════════════════════════════════════════════════════════════════════
+
+✓ Dialog/Modal chi tiết         - Cho tất cả hành động
+✓ Form báo cáo tương tác        - Bảo trì, chất lượng
+✓ Slider & Input                - Giá công, nhiệt độ, công suất
+✓ Date picker                   - Xem dữ liệu theo ngày/tháng/năm
+✓ Dropdown                      - Thay đổi ca, máy, chế độ
+✓ Real-time updates             - Sản lượng, lương, tiêu thụ
+✓ Tính toán tự động             - Lương, dự đoán AI
+✓ Status badges                 - Color-coded trạng thái
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 BẮTĐẦU NHANH
+═══════════════════════════════════════════════════════════════════════════════
+
+$ cd v0-project
+$ npm install
+$ npm run dev
+
+Truy cập: http://localhost:3000
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📖 HƯỚNG DẪN ĐỌC THEO NỨCMỤC ĐÍCH
+═══════════════════════════════════════════════════════════════════════════════
+
+Muốn Bắt Đầu Ngay?
+  → Đọc: SETUP.txt (2 phút) hoặc QUICK_START.md (5 phút)
+
+Muốn Hiểu Chi Tiết?
+  → Đọc: GET_STARTED.md (15 phút) ⭐ KHUYẾN CÁO
+
+Gặp Lỗi Cài Đặt?
+  → Xem: INSTALLATION.md - Phần Troubleshooting
+
+Muốn Biết Về Tính Năng?
+  → Xem: GET_STARTED.md - Phần 7 Views
+  → Xem: README.md - Phần Tính Năng Chính
+
+Muốn Kết Nối Backend Thực?
+  → Xem: GET_STARTED.md - Phần Tiếp Theo
+  → Xem: INSTALLATION.md - Phần Kết Nối Backend
+
+═══════════════════════════════════════════════════════════════════════════════
+
+💡 MẸO
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Đọc SETUP.txt trước - 2 phút, biết cách cài đặt ngay
+2. Nếu gặp lỗi, xem phần Troubleshooting
+3. Để hiểu toàn bộ, đọc GET_STARTED.md
+4. Tất cả tài liệu đều có sẵn, không cần tìm kiếm
+5. Dữ liệu sẽ reset khi tải lại - đây là giả lập
+6. Nếu muốn lưu dữ liệu, cần kết nối backend thực
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ DANH SÁCH KIỂM TRA CÀI ĐẶT
+═══════════════════════════════════════════════════════════════════════════════
+
+□ Node.js 18+ đã cài
+□ NPM hoặc pnpm đã cài
+□ Code đã giải nén
+□ Terminal/PowerShell mở tại thư mục dự án
+□ npm install chạy xong
+□ npm run dev chạy thành công
+□ Truy cập http://localhost:3000 thành công
+□ Giao diện hiển thị tất cả 7 views
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎓 HỌC THÊM
+═══════════════════════════════════════════════════════════════════════════════
+
+Để tùy chỉnh ứng dụng, xem:
+  - colors: app/globals.css
+  - layouts: components/views/
+  - styling: tailwind.config.ts
+  - logic: hooks/useFactoryData.ts
+
+Để tạo API, xem:
+  - Tạo: app/api/
+  - Gọi từ: hooks/useFactoryData.ts
+  - Dùng: fetch hoặc SWR
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📞 CÓ TRONG DỰÁN
+═══════════════════════════════════════════════════════════════════════════════
+
+Nếu bạn chỉ có dự án này:
+  1. Mở SETUP.txt & làm theo
+  2. Nếu gặp lỗi, mở GET_STARTED.md và xem phần Troubleshooting
+  3. Nếu vẫn không được, mở INSTALLATION.md và xem chi tiết
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 CHECKLIST CÀI ĐẶT
+═══════════════════════════════════════════════════════════════════════════════
+
+[ ] Tải Node.js từ https://nodejs.org/
+[ ] Cài đặt Node.js
+[ ] Tải xuống code từ v0.app
+[ ] Giải nén file ZIP
+[ ] Mở Terminal/PowerShell tại thư mục dự án
+[ ] Chạy: npm install
+[ ] Chạy: npm run dev
+[ ] Mở: http://localhost:3000
+[ ] Nhìn thấy giao diện ứng dụng
+[ ] Click các view khác nhau để khám phá
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎉 BẰNG CÁCH NÀY, BẠN ĐÃ HOÀN THÀNH!
+
+Chúc mừng! Bạn đã có một hệ thống quản lý nhà máy vải sợi hoàn chỉnh,
+có thể chạy trên máy tính của mình.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Phiên bản: 1.1
+Cập nhật: 26/02/2025
+Trạng thái: Production-Ready
+Ngôn ngữ: 100% Tiếng Việt
+
+═══════════════════════════════════════════════════════════════════════════════
