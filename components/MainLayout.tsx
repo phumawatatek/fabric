@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { BarChart3, Zap, Users, Cog, BarChart4, Activity, Truck } from 'lucide-react'
+import { BarChart3, Zap, Users, Cog, BarChart4, Activity, Truck, Package, ShoppingCart, Warehouse, DollarSign, Brain, Shield, Palette } from 'lucide-react'
 import Dashboard from './views/Dashboard'
 import Analytics from './views/Analytics'
 import HRKPIView from './views/HRKPIView'
@@ -9,8 +9,15 @@ import CottonMixingView from './views/CottonMixingView'
 import EnergyManagementView from './views/EnergyManagementView'
 import MaintenanceView from './views/MaintenanceView'
 import QualityManagementView from './views/QualityManagementView'
+import SupplyChainView from './views/SupplyChainView'
+import OrderManagementView from './views/OrderManagementView'
+import WarehouseView from './views/WarehouseView'
+import FinanceView from './views/FinanceView'
+import AIPredictionView from './views/AIPredictionView'
+import SafetyEnvironmentView from './views/SafetyEnvironmentView'
+import DyeingView from './views/DyeingView'
 
-type ViewType = 'dashboard' | 'analytics' | 'hr' | 'cotton' | 'energy' | 'maintenance' | 'quality'
+type ViewType = 'dashboard' | 'analytics' | 'hr' | 'cotton' | 'energy' | 'maintenance' | 'quality' | 'supply' | 'orders' | 'warehouse' | 'finance' | 'ai' | 'safety' | 'dyeing'
 
 const views: Array<{ id: ViewType; name: string; icon: React.ComponentType<any> }> = [
   { id: 'dashboard', name: 'Bảng Điều Khiển', icon: BarChart3 },
@@ -20,6 +27,13 @@ const views: Array<{ id: ViewType; name: string; icon: React.ComponentType<any> 
   { id: 'energy', name: 'Quản Lý Năng Lượng', icon: Zap },
   { id: 'maintenance', name: 'Bảo Trì', icon: Activity },
   { id: 'quality', name: 'Chất Lượng', icon: Truck },
+  { id: 'supply', name: 'Chuỗi Cung Ứng', icon: Package },
+  { id: 'orders', name: 'Đơn Hàng & KH', icon: ShoppingCart },
+  { id: 'warehouse', name: 'Kho Thành Phẩm', icon: Warehouse },
+  { id: 'finance', name: 'Tài Chính', icon: DollarSign },
+  { id: 'ai', name: 'AI Dự Đoán', icon: Brain },
+  { id: 'safety', name: 'An Toàn & MT', icon: Shield },
+  { id: 'dyeing', name: 'Nhuộm Vải', icon: Palette },
 ]
 
 export default function MainLayout() {
@@ -41,6 +55,20 @@ export default function MainLayout() {
         return <MaintenanceView />
       case 'quality':
         return <QualityManagementView />
+      case 'supply':
+        return <SupplyChainView />
+      case 'orders':
+        return <OrderManagementView />
+      case 'warehouse':
+        return <WarehouseView />
+      case 'finance':
+        return <FinanceView />
+      case 'ai':
+        return <AIPredictionView />
+      case 'safety':
+        return <SafetyEnvironmentView />
+      case 'dyeing':
+        return <DyeingView />
       default:
         return <Dashboard />
     }
