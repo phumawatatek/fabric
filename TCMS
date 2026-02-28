@@ -1,0 +1,873 @@
+import { useState } from "react"
+import {
+  LayoutDashboard, Database, Monitor, Users, DollarSign, Shield, Server, Clock,
+  ChevronRight, ChevronDown, Zap, AlertTriangle, Wrench, BarChart3, FileText,
+  Settings, Bell, Cpu, Factory, Thermometer, Activity, Lock, Eye, Edit, Trash2,
+  Plus, Search, Filter, Download, Calendar, UserCheck, TrendingUp, Award,
+  Layers, GitBranch, Globe, HardDrive, Wifi, Mail, Smartphone
+} from "lucide-react"
+
+const COLORS = {
+  navy: "#0F1B2D", dark: "#1A2744", primary: "#2563EB", secondary: "#0EA5E9",
+  success: "#059669", warning: "#D97706", danger: "#DC2626", purple: "#7C3AED",
+  teal: "#0D9488", orange: "#EA580C", pink: "#DB2777", gray: "#6B7280",
+}
+
+const tabs = [
+  { id: "arch", label: "Kiến Trúc", icon: Layers },
+  { id: "db", label: "Database", icon: Database },
+  { id: "ui", label: "UI/UX", icon: Monitor },
+  { id: "hr", label: "Năng Suất & Lương", icon: Users },
+  { id: "api", label: "API", icon: Server },
+  { id: "rbac", label: "RBAC & Roadmap", icon: Shield },
+]
+
+// ─── ARCHITECTURE TAB ───
+function ArchTab() {
+  const [openLayer, setOpenLayer] = useState(0)
+  const techStack = [
+    { icon: "🖥️", layer: "Frontend", tech: "React 18 + TypeScript", ver: "18.3+", reason: "Component-based, large ecosystem", color: COLORS.primary },
+    { icon: "🎨", layer: "UI Framework", tech: "Tailwind CSS + Shadcn/ui", ver: "3.4+", reason: "Rapid prototyping, consistent design", color: COLORS.purple },
+    { icon: "📊", layer: "Charts", tech: "Recharts + D3.js", ver: "2.12+", reason: "Biểu đồ sản xuất, T-CON viz", color: COLORS.teal },
+    { icon: "⚡", layer: "Real-time", tech: "WebSocket (Socket.io)", ver: "4.7+", reason: "Live logbook, alert notifications", color: COLORS.warning },
+    { icon: "🔧", layer: "Backend", tech: "NestJS + TypeScript", ver: "10.3+", reason: "Enterprise-grade, modular", color: COLORS.success },
+    { icon: "🗄️", layer: "Database", tech: "PostgreSQL + TimescaleDB", ver: "16+", reason: "Time-series cho logbook, T-CON", color: COLORS.danger },
+    { icon: "📦", layer: "Cache", tech: "Redis", ver: "7+", reason: "Session, real-time counters", color: COLORS.orange },
+    { icon: "🔐", layer: "Auth", tech: "JWT + RBAC", ver: "-", reason: "5 roles: Admin → Operator", color: COLORS.pink },
+    { icon: "📱", layer: "Mobile", tech: "PWA", ver: "-", reason: "Offline cho operator tại line", color: COLORS.secondary },
+    { icon: "🐳", layer: "DevOps", tech: "Docker + Nginx", ver: "-", reason: "Containerized deployment", color: COLORS.gray },
+  ]
+
+  const layers = [
+    { name: "PRESENTATION", color: COLORS.primary, items: [
+      "React SPA → Dashboard, Production, Maintenance, HR, Energy, Quality, Reports",
+      "Sidebar (collapsible) + Top Bar (alerts/user) + Main Content + Quick Stats",
+      "Real-time Toast + Sound Alert cho Malfunction/Warning/T-CON critical",
+    ]},
+    { name: "API GATEWAY", color: COLORS.teal, items: [
+      "REST: /api/v1/* | WebSocket: /ws/logbook, /ws/alerts, /ws/dashboard",
+      "JWT Bearer Token | Refresh rotation | Session timeout: 8h (= 1 ca)",
+      "RBAC middleware → check role + machine access per request",
+    ]},
+    { name: "BUSINESS LOGIC", color: COLORS.purple, items: [
+      "ProductionService: OEE, shift output, machine ranking",
+      "MaintenanceService: 7-group alert classification, T-CON analysis",
+      "HRService: Attendance, productivity scoring, salary calculation",
+      "EnergyService: UKG tracking, cost calc (2,000đ/kWh)",
+      "QualityService: NCT (Neps/Seeds/Trash), CV% monitoring",
+    ]},
+    { name: "DATA ACCESS", color: COLORS.warning, items: [
+      "TypeORM: Machine, LogEvent, Shift, User, TconReading, NctReport...",
+      "TimescaleDB hypertables: log_events, tcon_readings, energy_readings",
+      "Redis: current_shift_data, machine_status:{id}, alert_queue",
+    ]},
+    { name: "INTEGRATION", color: COLORS.gray, items: [
+      "Trutzschler Import: xlsx watcher → Parse → Validate → Insert (5 min)",
+      "Email/SMS: Critical malfunction → Notify supervisor + manager",
+      "Export: REST for ERP, Excel/PDF generation",
+    ]},
+  ]
+
+  return (
+    <div className="space-y-8">
+      {/* System Overview */}
+      <div className="rounded-xl overflow-hidden border border-slate-200">
+        <div className="px-5 py-3 bg-gradient-to-r from-slate-800 to-slate-700">
+          <h3 className="text-white font-semibold tracking-wide text-sm">TỔNG QUAN HỆ THỐNG</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+          {[
+            ["Tên hệ thống", "TCMS - Trutzschler Carding Management System"],
+            ["Quy mô", "9 máy TC19i + 1 TST5 | 3 ca/ngày | ~30+ nhân sự"],
+            ["Dữ liệu nguồn", "Logbook (2,697+ events/2 ngày), T-CON, NCT, Shift, Energy"],
+            ["Nền tảng", "Web App (Desktop + Tablet) | PWA cho mobile"],
+          ].map(([k, v], i) => (
+            <div key={i} className="flex gap-3 px-5 py-3">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider min-w-[100px]">{k}</span>
+              <span className="text-sm text-slate-700">{v}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Tech Stack */}
+      <div>
+        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Technology Stack</h3>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+          {techStack.map((t, i) => (
+            <div key={i} className="group relative rounded-lg border border-slate-200 p-3 hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default"
+              style={{ borderLeftColor: t.color, borderLeftWidth: 3 }}>
+              <div className="text-lg mb-1">{t.icon}</div>
+              <div className="text-[11px] font-bold text-slate-400 uppercase">{t.layer}</div>
+              <div className="text-xs font-semibold text-slate-800 mt-0.5">{t.tech}</div>
+              <div className="absolute inset-0 rounded-lg bg-slate-900 text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-center text-xs z-10">
+                <div className="font-bold">{t.tech}</div>
+                <div className="text-slate-300 mt-1">{t.reason}</div>
+                <div className="text-slate-500 mt-1">v{t.ver}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Architecture Layers */}
+      <div>
+        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Kiến Trúc Phân Lớp</h3>
+        <div className="space-y-1">
+          {layers.map((layer, i) => (
+            <div key={i} className="rounded-lg overflow-hidden border border-slate-200">
+              <button onClick={() => setOpenLayer(openLayer === i ? -1 : i)}
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-white text-sm font-semibold tracking-wide transition-colors"
+                style={{ backgroundColor: layer.color }}>
+                {openLayer === i ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                {layer.name}
+                <span className="ml-auto text-xs opacity-70">{layer.items.length} components</span>
+              </button>
+              {openLayer === i && (
+                <div className="px-4 py-2 space-y-1 bg-slate-50">
+                  {layer.items.map((item, j) => (
+                    <div key={j} className="flex items-start gap-2 text-xs text-slate-600 py-1">
+                      <div className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: layer.color }} />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── DATABASE TAB ───
+function DbTab() {
+  const [expandedTable, setExpandedTable] = useState("users")
+
+  const tables = [
+    { name: "users", desc: "Tài khoản nhân sự", color: COLORS.primary, icon: Users, count: 20,
+      fields: [
+        { n: "id", t: "UUID", k: "PK", d: "Mã nhân viên" },
+        { n: "employee_code", t: "VARCHAR(20)", k: "UQ", d: "Mã NV: NV001, NV002..." },
+        { n: "full_name", t: "VARCHAR(100)", k: "", d: "Họ tên đầy đủ" },
+        { n: "email", t: "VARCHAR(100)", k: "UQ", d: "Email (optional)" },
+        { n: "phone", t: "VARCHAR(15)", k: "", d: "SĐT liên hệ" },
+        { n: "password_hash", t: "VARCHAR(255)", k: "", d: "Bcrypt hash" },
+        { n: "role", t: "ENUM", k: "", d: "admin|manager|supervisor|technician|operator" },
+        { n: "department", t: "VARCHAR(50)", k: "", d: "Chải | Ghép | Bảo trì | Quản lý" },
+        { n: "position", t: "VARCHAR(50)", k: "", d: "Chức danh" },
+        { n: "machine_password", t: "INTEGER", k: "", d: "Mật mã đăng nhập máy (1, 2)" },
+        { n: "hourly_rate", t: "DECIMAL", k: "", d: "Lương/giờ (VNĐ)" },
+        { n: "daily_rate", t: "DECIMAL", k: "", d: "Lương/ngày (VNĐ)" },
+        { n: "base_salary", t: "DECIMAL", k: "", d: "Lương cơ bản/tháng" },
+        { n: "ot_rate_multiplier", t: "DECIMAL", k: "", d: "Hệ số OT (1.5x, 2.0x)" },
+        { n: "shift_group", t: "VARCHAR(10)", k: "FK", d: "Nhóm ca: A, B, C" },
+        { n: "assigned_machines", t: "JSONB", k: "", d: "[\"TC19i 01\",\"TC19i 02\"]" },
+        { n: "status", t: "ENUM", k: "", d: "active|inactive|suspended" },
+      ]
+    },
+    { name: "machines", desc: "Danh sách máy", color: COLORS.teal, icon: Cpu, count: 15,
+      fields: [
+        { n: "id", t: "UUID", k: "PK", d: "Machine ID" },
+        { n: "machine_code", t: "VARCHAR(20)", k: "UQ", d: "TC19i 01...09, TST5 01" },
+        { n: "machine_type", t: "VARCHAR(50)", k: "", d: "TC19i | TST5" },
+        { n: "line_name", t: "VARCHAR(20)", k: "", d: "LINE 1" },
+        { n: "status", t: "ENUM", k: "", d: "running|stopped|maintenance|malfunction" },
+        { n: "current_speed_rpm", t: "INTEGER", k: "", d: "514-522 rpm" },
+        { n: "current_production_kgh", t: "DECIMAL", k: "", d: "66.0 - 80.1 kg/h" },
+        { n: "cylinder_temp", t: "DECIMAL", k: "", d: "45.8 - 48.0 °C" },
+        { n: "tcon_status", t: "ENUM", k: "", d: "Active|Inactive|Warning" },
+        { n: "heating_status", t: "ENUM", k: "", d: "Warm|Cold|Heating" },
+        { n: "tcon_reference_date", t: "DATE", k: "", d: "Ngày reference T-CON" },
+        { n: "total_runtime_hours", t: "DECIMAL", k: "", d: "Tổng giờ chạy" },
+      ]
+    },
+    { name: "log_events", desc: "Logbook sự kiện (TimescaleDB)", color: COLORS.danger, icon: Activity, count: 14,
+      fields: [
+        { n: "id", t: "BIGSERIAL", k: "PK", d: "Auto increment" },
+        { n: "event_time", t: "TIMESTAMPTZ", k: "IDX", d: "Hypertable partition key" },
+        { n: "machine_id", t: "UUID", k: "FK", d: "→ machines" },
+        { n: "event_type", t: "ENUM", k: "IDX", d: "10 types: Information, Warning, Malfunction..." },
+        { n: "event_category", t: "INTEGER", k: "", d: "Nhóm 1-7 theo bảng phân loại" },
+        { n: "message", t: "VARCHAR(255)", k: "", d: "IDF Đứt cúi, Đổi ca, T-CON..." },
+        { n: "information", t: "VARCHAR(100)", k: "", d: "Mã lỗi, giá trị" },
+        { n: "severity", t: "ENUM", k: "", d: "info|low|medium|high|critical" },
+        { n: "acknowledged", t: "BOOLEAN", k: "", d: "Đã xác nhận xử lý?" },
+        { n: "acknowledged_by", t: "UUID", k: "FK", d: "→ users" },
+        { n: "shift_id", t: "UUID", k: "FK", d: "→ shifts" },
+        { n: "notes", t: "TEXT", k: "", d: "Ghi chú xử lý" },
+      ]
+    },
+    { name: "shifts", desc: "Ca làm việc", color: COLORS.purple, icon: Clock, count: 16,
+      fields: [
+        { n: "id", t: "UUID", k: "PK", d: "Shift ID" },
+        { n: "shift_number", t: "INTEGER", k: "", d: "1=06-14h, 2=14-22h, 3=22-06h" },
+        { n: "shift_date", t: "DATE", k: "IDX", d: "Ngày ca" },
+        { n: "supervisor_id", t: "UUID", k: "FK", d: "→ users (ca trưởng)" },
+        { n: "total_production_kg", t: "DECIMAL", k: "", d: "Tổng sản lượng (718 kg)" },
+        { n: "efficiency_pct", t: "DECIMAL", k: "", d: "Hiệu suất (78.0%)" },
+        { n: "energy_kwh", t: "DECIMAL", k: "", d: "Tiêu thụ điện (98 kWh)" },
+        { n: "ukg", t: "DECIMAL", k: "", d: "0.14 kWh/kg" },
+        { n: "total_malfunctions", t: "INTEGER", k: "", d: "Tổng malfunction" },
+        { n: "downtime_minutes", t: "INTEGER", k: "", d: "Tổng downtime (phút)" },
+      ]
+    },
+    { name: "attendance", desc: "Chấm công", color: COLORS.orange, icon: UserCheck, count: 14,
+      fields: [
+        { n: "id", t: "UUID", k: "PK", d: "Attendance ID" },
+        { n: "user_id", t: "UUID", k: "FK", d: "→ users" },
+        { n: "shift_id", t: "UUID", k: "FK", d: "→ shifts" },
+        { n: "check_in_time", t: "TIMESTAMPTZ", k: "", d: "Giờ vào ca" },
+        { n: "check_out_time", t: "TIMESTAMPTZ", k: "", d: "Giờ ra ca" },
+        { n: "machine_login_time", t: "TIMESTAMPTZ", k: "", d: "Login máy (from logbook)" },
+        { n: "machine_login_password", t: "INTEGER", k: "", d: "Mật mã 1 hoặc 2" },
+        { n: "total_hours", t: "DECIMAL", k: "", d: "Giờ làm thực tế" },
+        { n: "overtime_hours", t: "DECIMAL", k: "", d: "Giờ OT" },
+        { n: "attendance_type", t: "ENUM", k: "", d: "normal|overtime|absent|leave" },
+      ]
+    },
+    { name: "productivity_scores", desc: "Năng suất nhân sự", color: COLORS.pink, icon: TrendingUp, count: 14,
+      fields: [
+        { n: "id", t: "UUID", k: "PK", d: "Score ID" },
+        { n: "user_id", t: "UUID", k: "FK", d: "→ users" },
+        { n: "shift_id", t: "UUID", k: "FK", d: "→ shifts" },
+        { n: "production_output_kg", t: "DECIMAL", k: "", d: "Sản lượng cá nhân" },
+        { n: "malfunction_count", t: "INTEGER", k: "", d: "Số lỗi máy phụ trách" },
+        { n: "response_time_avg_min", t: "DECIMAL", k: "", d: "Thời gian xử lý TB" },
+        { n: "quality_score", t: "DECIMAL", k: "", d: "0-10 (CV%, NCT)" },
+        { n: "productivity_index", t: "DECIMAL", k: "", d: "Tổng hợp 0-100" },
+        { n: "performance_grade", t: "ENUM", k: "", d: "A|B|C|D|F" },
+        { n: "bonus_amount", t: "DECIMAL", k: "", d: "Thưởng năng suất (VNĐ)" },
+      ]
+    },
+    { name: "payroll", desc: "Bảng lương", color: COLORS.warning, icon: DollarSign, count: 16,
+      fields: [
+        { n: "id", t: "UUID", k: "PK", d: "Payroll ID" },
+        { n: "user_id", t: "UUID", k: "FK", d: "→ users" },
+        { n: "period_month/year", t: "INTEGER", k: "", d: "Tháng + Năm" },
+        { n: "total_workdays", t: "DECIMAL", k: "", d: "Ngày công thực tế" },
+        { n: "base_pay", t: "DECIMAL", k: "", d: "Lương cơ bản" },
+        { n: "ot_pay", t: "DECIMAL", k: "", d: "Lương OT" },
+        { n: "shift_allowance", t: "DECIMAL", k: "", d: "Phụ cấp ca đêm ×1.3" },
+        { n: "productivity_bonus", t: "DECIMAL", k: "", d: "Thưởng năng suất" },
+        { n: "attendance_bonus", t: "DECIMAL", k: "", d: "Thưởng chuyên cần" },
+        { n: "deductions", t: "DECIMAL", k: "", d: "BHXH + Thuế TNCN" },
+        { n: "net_pay", t: "DECIMAL", k: "", d: "Lương thực nhận" },
+      ]
+    },
+    { name: "tcon_readings", desc: "T-CON Data (TimescaleDB)", color: COLORS.danger, icon: Thermometer, count: 26,
+      fields: [
+        { n: "reading_time", t: "TIMESTAMPTZ", k: "IDX", d: "Hypertable key" },
+        { n: "machine_id", t: "UUID", k: "FK", d: "→ machines" },
+        { n: "sp_licker_in/mtt/flats/doffer", t: "INTEGER", k: "", d: "Setpoints [1/1000\"]" },
+        { n: "cv_licker_in/mtt/flats/doffer", t: "DECIMAL", k: "", d: "Current Values" },
+        { n: "rec_licker_in/mtt/flats/doffer", t: "INTEGER", k: "", d: "Recommendations" },
+        { n: "ambient_temp", t: "DECIMAL", k: "", d: "°C môi trường" },
+        { n: "cylinder_temp", t: "DECIMAL", k: "", d: "°C thùng lớn (45-48)" },
+        { n: "shield_temp_left/right", t: "DECIMAL", k: "", d: "°C shield trái/phải" },
+      ]
+    },
+    { name: "maintenance_plans", desc: "Kế hoạch bảo trì", color: COLORS.teal, icon: Wrench, count: 13,
+      fields: [
+        { n: "id", t: "UUID", k: "PK", d: "Plan ID" },
+        { n: "machine_id", t: "UUID", k: "FK", d: "→ machines" },
+        { n: "maintenance_type", t: "ENUM", k: "", d: "preventive|corrective|predictive" },
+        { n: "cycle_number", t: "INTEGER", k: "", d: "Chu kỳ BT: 1, 2, 3" },
+        { n: "component", t: "VARCHAR", k: "", d: "Thùng lớn|Mui|Trục gai|TWIN TOP" },
+        { n: "scheduled_date", t: "DATE", k: "", d: "Ngày dự kiến" },
+        { n: "assigned_to", t: "UUID", k: "FK", d: "→ users (kỹ thuật viên)" },
+        { n: "status", t: "ENUM", k: "", d: "scheduled|in_progress|completed|overdue" },
+      ]
+    },
+  ]
+
+  const keyBg = { PK: "bg-amber-100 text-amber-700", FK: "bg-blue-100 text-blue-700", UQ: "bg-purple-100 text-purple-700", IDX: "bg-emerald-100 text-emerald-700" }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-2 text-xs text-slate-400">
+        <HardDrive size={14} /> PostgreSQL 16 + TimescaleDB
+        <span className="mx-2">•</span>
+        {tables.length} bảng chính
+        <span className="mx-2">•</span>
+        {tables.reduce((a, t) => a + t.count, 0)}+ trường dữ liệu
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        {tables.map((table) => {
+          const Icon = table.icon
+          const isOpen = expandedTable === table.name
+          return (
+            <div key={table.name} className="rounded-lg border border-slate-200 overflow-hidden">
+              <button onClick={() => setExpandedTable(isOpen ? "" : table.name)}
+                className="w-full flex items-center gap-2.5 px-4 py-2.5 text-left hover:bg-slate-50 transition-colors">
+                <div className="w-7 h-7 rounded flex items-center justify-center" style={{ backgroundColor: table.color + "18" }}>
+                  <Icon size={14} style={{ color: table.color }} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-bold text-slate-800 font-mono">{table.name}</div>
+                  <div className="text-[11px] text-slate-400">{table.desc} • {table.count} fields</div>
+                </div>
+                {isOpen ? <ChevronDown size={14} className="text-slate-400" /> : <ChevronRight size={14} className="text-slate-400" />}
+              </button>
+
+              {isOpen && (
+                <div className="border-t border-slate-100">
+                  <div className="grid grid-cols-[1fr_90px_40px_1fr] gap-0 text-[10px] font-bold text-slate-400 uppercase px-4 py-1.5 bg-slate-50 tracking-wider">
+                    <span>Field</span><span>Type</span><span>Key</span><span>Description</span>
+                  </div>
+                  {table.fields.map((f, j) => (
+                    <div key={j} className={`grid grid-cols-[1fr_90px_40px_1fr] gap-0 px-4 py-1.5 text-xs ${j % 2 === 0 ? "bg-white" : "bg-slate-50/50"}`}>
+                      <span className="font-mono font-semibold text-slate-700">{f.n}</span>
+                      <span className="font-mono text-blue-600">{f.t}</span>
+                      <span>{f.k && <span className={`text-[9px] font-bold px-1 py-0.5 rounded ${keyBg[f.k] || "bg-slate-100 text-slate-500"}`}>{f.k}</span>}</span>
+                      <span className="text-slate-500 truncate">{f.d}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+// ─── UI/UX TAB ───
+function UiTab() {
+  const screens = [
+    { group: "Authentication", color: COLORS.gray, icon: Lock, screens: [
+      { id: "S-01", name: "Login Page", route: "/login", role: "Tất cả", desc: "Employee code + Password | Logo | Ca hiện tại | Background dây chuyền" },
+      { id: "S-02", name: "Profile", route: "/profile", role: "Tất cả", desc: "Thông tin cá nhân | Đổi mật khẩu | Thống kê năng suất mini | Lương tháng" },
+    ]},
+    { group: "Dashboard", color: COLORS.primary, icon: LayoutDashboard, screens: [
+      { id: "S-03", name: "Main Dashboard", route: "/", role: "Supervisor+", desc: "KPI Cards (4) | Machine Grid (9 ô) | Live Feed | Shift Timeline | Auto-refresh 5s" },
+      { id: "S-04", name: "Operator Dashboard", route: "/operator", role: "Operator", desc: "Máy đang phụ trách | Nút BÁO LỖI | Checklist đầu ca | Tablet-friendly" },
+    ]},
+    { group: "Sản Xuất", color: COLORS.success, icon: Factory, screens: [
+      { id: "S-05", name: "Production Overview", route: "/production", role: "Supervisor+", desc: "Sản lượng/máy real-time | OEE gauge | So sánh mục tiêu | Export" },
+      { id: "S-06", name: "Machine Detail", route: "/machine/:id", role: "Operator+", desc: "5 tabs: Logbook | T-CON | Params | Production | Maintenance | 7 nhóm color-coded" },
+      { id: "S-07", name: "Shift Report", route: "/shift/:id", role: "Supervisor+", desc: "Tổng hợp ca: SL, Hiệu suất, Lỗi, NL | Nút Kết ca + Lock data | Export PDF" },
+    ]},
+    { group: "Bảo Trì", color: COLORS.danger, icon: AlertTriangle, screens: [
+      { id: "S-08", name: "Alert Center", route: "/alerts", role: "Technician+", desc: "Real-time feed | Severity color | Xác nhận xử lý | Sound alert | Escalation 15 phút" },
+      { id: "S-09", name: "T-CON Monitor", route: "/tcon", role: "Technician+", desc: "9 máy gauge charts | Heatmap nhiệt độ | Deviation trend | Cylinder >48°C warning" },
+      { id: "S-10", name: "Maintenance Planner", route: "/plans", role: "Technician+", desc: "Calendar + Kanban | Chu kỳ 1/2/3 | Assign KTV | Cost tracking | Overdue alert" },
+    ]},
+    { group: "Nhân Sự & Năng Suất", color: COLORS.purple, icon: Users, screens: [
+      { id: "S-11", name: "Employee List", route: "/employees", role: "Manager+", desc: "CRUD NV | Search + Filter | Grade badge A-F | Import Excel" },
+      { id: "S-12", name: "Employee Detail", route: "/employees/:id", role: "Manager+", desc: "Profile | Chấm công heatmap | Năng suất trend | Lương kê tháng | Login history" },
+      { id: "S-13", name: "Attendance", route: "/attendance", role: "Supervisor+", desc: "Bảng công theo ngày/ca | Đồng bộ machine login | Tính giờ tự động | Bulk approve" },
+      { id: "S-14", name: "Productivity", route: "/productivity", role: "Manager+", desc: "Ranking NV (0-100) | Radar chart | Heatmap NV×Ngày | So sánh ca A/B/C" },
+    ]},
+    { group: "Lương & Chi Phí", color: COLORS.warning, icon: DollarSign, screens: [
+      { id: "S-15", name: "Payroll", route: "/payroll", role: "Manager+", desc: "Lương CB + OT + Phụ cấp + Thưởng - Khấu trừ | Ca đêm ×1.3 | Approve workflow" },
+      { id: "S-16", name: "Cost Analytics", route: "/costs", role: "Manager+", desc: "Nhân công + Năng lượng + Bảo trì | Trend | Cost per kg | Budget vs Actual" },
+    ]},
+    { group: "Năng Lượng & Chất Lượng", color: COLORS.teal, icon: Zap, screens: [
+      { id: "S-17", name: "Energy Monitor", route: "/energy", role: "Supervisor+", desc: "UKG gauge (0.14 kWh/kg) | Cost = kWh × 2,000đ | Target overlay | Cảnh báo" },
+      { id: "S-18", name: "Quality NCT", route: "/quality", role: "Supervisor+", desc: "Neps/Seeds/Trash grid | Working width 1-60mm | CV% tracking | Chi số cúi" },
+    ]},
+    { group: "Báo Cáo & Admin", color: COLORS.navy, icon: Settings, screens: [
+      { id: "S-19", name: "Report Builder", route: "/reports", role: "Supervisor+", desc: "6 templates | Custom fields + filter | Excel/PDF | Schedule email" },
+      { id: "S-20", name: "Logbook Explorer", route: "/logbook", role: "Operator+", desc: "10 types × 10 machines | 7 nhóm color-coded | Search | Paginated | Export" },
+      { id: "S-21", name: "Admin Settings", route: "/admin", role: "Admin", desc: "Shift times | Energy cost | Alert rules | Salary config | Audit log" },
+      { id: "S-22", name: "Shift Scheduler", route: "/scheduler", role: "Manager+", desc: "Drag-drop Mon-Sun × 3 ca | Assign máy | Template | Holiday mgmt" },
+    ]},
+  ]
+
+  return (
+    <div className="space-y-6">
+      {/* Design System Preview */}
+      <div className="rounded-xl border border-slate-200 p-4">
+        <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Design System — Color Palette</h4>
+        <div className="flex flex-wrap gap-2">
+          {[
+            ["Navy", COLORS.navy], ["Primary", COLORS.primary], ["Success", COLORS.success],
+            ["Warning", COLORS.warning], ["Danger", COLORS.danger], ["Purple", COLORS.purple],
+            ["Teal", COLORS.teal], ["Orange", COLORS.orange], ["Pink", COLORS.pink],
+          ].map(([n, c]) => (
+            <div key={n} className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-slate-50">
+              <div className="w-4 h-4 rounded" style={{ backgroundColor: c }} />
+              <span className="text-[11px] font-medium text-slate-600">{n}</span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 text-[11px] text-slate-400">
+          Theme: Industrial Dashboard • Dark Navy Sidebar + Light Content • Responsive 1920px → 768px • Font: Noto Sans Vietnamese
+        </div>
+      </div>
+
+      {/* Screen List */}
+      <div className="text-xs text-slate-400 font-medium">22 Screens • 5 Roles • Responsive</div>
+      <div className="space-y-4">
+        {screens.map((group) => {
+          const Icon = group.icon
+          return (
+            <div key={group.group}>
+              <div className="flex items-center gap-2 mb-2 px-1">
+                <Icon size={14} style={{ color: group.color }} />
+                <span className="text-sm font-bold" style={{ color: group.color }}>{group.group}</span>
+                <span className="text-[10px] text-slate-400">{group.screens.length} screens</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {group.screens.map((s) => (
+                  <div key={s.id} className="rounded-lg border border-slate-200 p-3 hover:shadow-sm transition-shadow"
+                    style={{ borderTopColor: group.color, borderTopWidth: 2 }}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-mono font-bold text-slate-400">{s.id}</span>
+                        <span className="text-sm font-bold text-slate-800">{s.name}</span>
+                      </div>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 font-medium">{s.role}</span>
+                    </div>
+                    <div className="text-[10px] font-mono text-slate-400 mb-1.5">{s.route}</div>
+                    <div className="text-xs text-slate-500 leading-relaxed">{s.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+// ─── HR TAB ───
+function HrTab() {
+  const grades = [
+    { g: "A", range: "≥ 90", label: "Xuất sắc", bonus: "500,000", color: COLORS.success, stars: 5 },
+    { g: "B", range: "80-89", label: "Tốt", bonus: "300,000", color: COLORS.primary, stars: 4 },
+    { g: "C", range: "70-79", label: "Đạt", bonus: "150,000", color: COLORS.warning, stars: 3 },
+    { g: "D", range: "60-69", label: "Cần cải thiện", bonus: "0", color: COLORS.orange, stars: 2 },
+    { g: "F", range: "< 60", label: "Không đạt", bonus: "-200,000", color: COLORS.danger, stars: 1 },
+  ]
+
+  const payroll = [
+    { id: "NV001", name: "Nguyễn Văn A", role: "Operator", days: 26, ot: 12, base: 6500, otPay: 630, night: 600, bonus: 13000, attend: 500, deduct: 682, net: 20548, grade: "A" },
+    { id: "NV002", name: "Trần Thị B", role: "Operator", days: 25, ot: 8, base: 6250, otPay: 420, night: 450, bonus: 3900, attend: 500, deduct: 656, net: 10864, grade: "C" },
+    { id: "NV003", name: "Lê Văn C", role: "Technician", days: 26, ot: 20, base: 7800, otPay: 1050, night: 0, bonus: 7800, attend: 500, deduct: 819, net: 16331, grade: "B" },
+    { id: "NV005", name: "Hoàng Văn E", role: "Ca trưởng", days: 26, ot: 16, base: 9100, otPay: 840, night: 780, bonus: 13000, attend: 500, deduct: 956, net: 23264, grade: "A" },
+  ]
+
+  const gradeColor = { A: "text-emerald-600 bg-emerald-50", B: "text-blue-600 bg-blue-50", C: "text-amber-600 bg-amber-50", D: "text-orange-600 bg-orange-50", F: "text-red-600 bg-red-50" }
+
+  const workflow = [
+    { step: "1", name: "SHIFT START", desc: "Phát hiện Shift change event (06:00/14:00/22:00)", color: COLORS.primary, icon: Clock },
+    { step: "2", name: "MACHINE LOGIN", desc: "NV đăng nhập máy bằng mật mã (1 hoặc 2)", color: COLORS.teal, icon: Lock },
+    { step: "3", name: "MAPPING", desc: "Map machine_password → user (ai dùng mật mã nào)", color: COLORS.purple, icon: GitBranch },
+    { step: "4", name: "TRACKING", desc: "Ghi nhận events → tính output, malfunction, response time", color: COLORS.success, icon: Activity },
+    { step: "5", name: "SHIFT END", desc: "Shift change tiếp → total_hours = end - start", color: COLORS.warning, icon: Clock },
+    { step: "6", name: "CALCULATE", desc: "Auto: Productivity Index + Grade + Bonus mỗi NV", color: COLORS.orange, icon: BarChart3 },
+    { step: "7", name: "APPROVE", desc: "Ca trưởng review + approve → Lock data", color: COLORS.danger, icon: UserCheck },
+  ]
+
+  return (
+    <div className="space-y-8">
+      {/* Productivity Formula */}
+      <div className="rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 p-5 text-white">
+        <h3 className="text-sm font-bold tracking-wide mb-3">CÔNG THỨC TÍNH NĂNG SUẤT</h3>
+        <div className="text-lg font-mono font-bold mb-4">
+          PI = (Output × 0.40) + (Quality × 0.25) + (Response × 0.20) + (Safety × 0.15)
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {[
+            { name: "Output", weight: "40%", src: "production_output_kg ÷ target", color: "bg-white/20" },
+            { name: "Quality", weight: "25%", src: "100 - malfunction×5 - cv_dev×10", color: "bg-white/15" },
+            { name: "Response", weight: "20%", src: "100 - avg_response_time×2", color: "bg-white/10" },
+            { name: "Safety", weight: "15%", src: "100 - safety_incidents×20", color: "bg-white/10" },
+          ].map((c, i) => (
+            <div key={i} className={`rounded-lg p-3 ${c.color}`}>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-sm font-bold">{c.name}</span>
+                <span className="text-xs font-mono opacity-80">{c.weight}</span>
+              </div>
+              <div className="text-[10px] font-mono opacity-70">{c.src}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Grade System */}
+      <div>
+        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Xếp Hạng & Thưởng/Ca</h3>
+        <div className="flex gap-2">
+          {grades.map((g) => (
+            <div key={g.g} className="flex-1 rounded-lg border-2 p-3 text-center transition-transform hover:scale-105"
+              style={{ borderColor: g.color }}>
+              <div className="text-2xl font-black" style={{ color: g.color }}>{g.g}</div>
+              <div className="text-[10px] font-mono text-slate-400 mt-1">{g.range} điểm</div>
+              <div className="text-xs font-medium text-slate-600 mt-1">{g.label}</div>
+              <div className="text-xs mt-1">{"⭐".repeat(g.stars)}</div>
+              <div className="text-xs font-bold mt-2" style={{ color: g.color }}>{g.bonus}đ</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Salary Formula */}
+      <div className="rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-4 py-2.5 bg-slate-800 text-white text-sm font-semibold">Công Thức Tính Lương</div>
+        <div className="divide-y divide-slate-100">
+          {[
+            ["Lương cơ bản", "daily_rate × workdays", "250,000đ/ngày × 26 = 6,500,000đ"],
+            ["Lương OT", "hourly × OT_hours × 1.5x", "35,000đ × 20h × 1.5 = 1,050,000đ"],
+            ["Phụ cấp ca đêm", "daily × 0.3 × ca_đêm_count", "Ca 22h-06h: +30% lương ngày"],
+            ["Thưởng năng suất", "SUM(bonus/ca) trong tháng", "Grade A: 500K × 26 ca = 13,000,000đ"],
+            ["Thưởng chuyên cần", "Đủ công + không trễ", "500,000đ/tháng"],
+            ["Khấu trừ", "BHXH 8% + BHYT 1.5% + BHTN 1%", "Tổng 10.5% lương đóng BH"],
+          ].map(([name, formula, example], i) => (
+            <div key={i} className={`grid grid-cols-3 gap-4 px-4 py-2.5 text-xs ${i % 2 === 0 ? "bg-white" : "bg-slate-50"}`}>
+              <span className="font-bold text-slate-700">{name}</span>
+              <span className="font-mono text-blue-600">{formula}</span>
+              <span className="text-slate-400">{example}</span>
+            </div>
+          ))}
+          <div className="grid grid-cols-3 gap-4 px-4 py-2.5 text-xs bg-blue-50 font-bold">
+            <span className="text-blue-800">LƯƠNG THỰC NHẬN</span>
+            <span className="text-blue-600 font-mono">base + OT + night + bonus − deductions</span>
+            <span className="text-blue-500">Hiển thị chi tiết trên payslip</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Sample Payroll */}
+      <div className="rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-4 py-2.5 bg-slate-800 text-white text-sm font-semibold">Bảng Lương Mẫu — T02/2026 (đơn vị: nghìn VNĐ)</div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-slate-100">
+                {["Mã NV","Họ Tên","Chức Vụ","Ngày","OT","Lương CB","OT","Ca Đêm","NS","CC","Trừ","Thực Nhận","Grade"].map(h => (
+                  <th key={h} className="px-2 py-2 text-left font-semibold text-slate-500 whitespace-nowrap">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {payroll.map((p, i) => (
+                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50/50"}>
+                  <td className="px-2 py-2 font-mono font-bold text-slate-600">{p.id}</td>
+                  <td className="px-2 py-2 font-medium text-slate-800">{p.name}</td>
+                  <td className="px-2 py-2 text-slate-500">{p.role}</td>
+                  <td className="px-2 py-2 text-center">{p.days}</td>
+                  <td className="px-2 py-2 text-center">{p.ot}h</td>
+                  <td className="px-2 py-2 text-right">{p.base.toLocaleString()}</td>
+                  <td className="px-2 py-2 text-right">{p.otPay.toLocaleString()}</td>
+                  <td className="px-2 py-2 text-right">{p.night.toLocaleString()}</td>
+                  <td className="px-2 py-2 text-right font-medium">{p.bonus.toLocaleString()}</td>
+                  <td className="px-2 py-2 text-right">{p.attend.toLocaleString()}</td>
+                  <td className="px-2 py-2 text-right text-red-500">-{p.deduct.toLocaleString()}</td>
+                  <td className="px-2 py-2 text-right font-bold text-slate-800">{p.net.toLocaleString()}</td>
+                  <td className="px-2 py-2 text-center"><span className={`px-1.5 py-0.5 rounded font-bold ${gradeColor[p.grade]}`}>{p.grade}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Workflow */}
+      <div>
+        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Workflow Chấm Công Tự Động</h3>
+        <div className="flex flex-col gap-1">
+          {workflow.map((w, i) => {
+            const Icon = w.icon
+            return (
+              <div key={i} className="flex items-center gap-3 group">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+                  style={{ backgroundColor: w.color }}>
+                  {w.step}
+                </div>
+                <div className="flex-1 flex items-center gap-3 rounded-lg border border-slate-200 px-3 py-2 group-hover:border-slate-300 transition-colors">
+                  <Icon size={14} style={{ color: w.color }} />
+                  <span className="text-xs font-bold text-slate-700 min-w-[110px]">{w.name}</span>
+                  <span className="text-xs text-slate-500">{w.desc}</span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── API TAB ───
+function ApiTab() {
+  const [openMod, setOpenMod] = useState("AUTH")
+  const methodStyle = {
+    GET: "bg-emerald-100 text-emerald-700", POST: "bg-blue-100 text-blue-700",
+    PUT: "bg-amber-100 text-amber-700", DELETE: "bg-red-100 text-red-700", SUB: "bg-orange-100 text-orange-700",
+  }
+
+  const modules = [
+    { name: "AUTH", prefix: "/api/v1/auth", color: COLORS.gray, eps: [
+      ["POST", "/login", "Đăng nhập", "Public"],
+      ["POST", "/refresh", "Refresh token", "Auth"],
+      ["POST", "/logout", "Đăng xuất", "Auth"],
+      ["GET", "/me", "User hiện tại", "Auth"],
+      ["PUT", "/change-password", "Đổi mật khẩu", "Auth"],
+    ]},
+    { name: "USERS", prefix: "/api/v1/users", color: COLORS.purple, eps: [
+      ["GET", "/", "Danh sách NV", "Manager+"],
+      ["POST", "/", "Tạo NV mới", "Admin"],
+      ["GET", "/:id", "Chi tiết NV", "Manager+"],
+      ["PUT", "/:id", "Cập nhật NV", "Admin"],
+      ["GET", "/:id/attendance", "Lịch sử chấm công", "Supervisor+"],
+      ["GET", "/:id/productivity", "Năng suất NV", "Manager+"],
+      ["GET", "/:id/payslip", "Phiếu lương", "Self/Manager"],
+      ["POST", "/import", "Import Excel", "Admin"],
+    ]},
+    { name: "MACHINES", prefix: "/api/v1/machines", color: COLORS.teal, eps: [
+      ["GET", "/", "Danh sách máy + status", "Operator+"],
+      ["GET", "/:id", "Chi tiết máy", "Operator+"],
+      ["GET", "/:id/logbook", "Logbook theo máy", "Operator+"],
+      ["GET", "/:id/tcon", "T-CON data", "Technician+"],
+      ["GET", "/:id/production", "Sản lượng máy", "Supervisor+"],
+    ]},
+    { name: "PRODUCTION", prefix: "/api/v1/production", color: COLORS.success, eps: [
+      ["GET", "/dashboard", "Dashboard SX", "Supervisor+"],
+      ["GET", "/oee", "Tính OEE", "Supervisor+"],
+      ["GET", "/shifts", "Danh sách ca", "Supervisor+"],
+      ["GET", "/shifts/:id", "Chi tiết ca", "Supervisor+"],
+      ["POST", "/shifts/:id/complete", "Kết thúc ca", "Supervisor"],
+    ]},
+    { name: "MAINTENANCE", prefix: "/api/v1/maintenance", color: COLORS.danger, eps: [
+      ["GET", "/alerts", "Danh sách cảnh báo", "Technician+"],
+      ["PUT", "/alerts/:id/acknowledge", "Xác nhận xử lý", "Technician+"],
+      ["GET", "/tcon", "T-CON tổng quan", "Technician+"],
+      ["GET", "/plans", "Kế hoạch BT", "Technician+"],
+      ["POST", "/plans", "Tạo KH bảo trì", "Technician+"],
+    ]},
+    { name: "HR & PAYROLL", prefix: "/api/v1/hr", color: COLORS.pink, eps: [
+      ["GET", "/attendance", "Bảng chấm công", "Supervisor+"],
+      ["POST", "/attendance/approve", "Duyệt bảng công", "Supervisor"],
+      ["GET", "/productivity", "Dashboard năng suất", "Manager+"],
+      ["GET", "/payroll", "Bảng lương", "Manager+"],
+      ["POST", "/payroll/calculate", "Tính lương tháng", "Manager"],
+      ["PUT", "/payroll/:id/approve", "Duyệt lương", "Manager"],
+      ["GET", "/scheduler", "Lịch phân ca", "Supervisor+"],
+      ["POST", "/scheduler", "Cập nhật lịch ca", "Manager"],
+    ]},
+    { name: "WEBSOCKET", prefix: "/ws", color: COLORS.orange, eps: [
+      ["SUB", "/logbook", "Live logbook events", "Auth"],
+      ["SUB", "/alerts", "Critical alerts + sound", "Auth"],
+      ["SUB", "/dashboard", "KPI updates 5s", "Auth"],
+      ["SUB", "/tcon", "T-CON readings", "Auth"],
+    ]},
+  ]
+
+  return (
+    <div className="space-y-3">
+      <div className="text-xs text-slate-400">RESTful API v1 • NestJS • JWT Auth • {modules.reduce((a, m) => a + m.eps.length, 0)} endpoints</div>
+      {modules.map((mod) => (
+        <div key={mod.name} className="rounded-lg border border-slate-200 overflow-hidden">
+          <button onClick={() => setOpenMod(openMod === mod.name ? "" : mod.name)}
+            className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-slate-50">
+            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: mod.color }} />
+            <span className="text-sm font-bold text-slate-800">{mod.name}</span>
+            <span className="text-[10px] font-mono text-slate-400">{mod.prefix}</span>
+            <span className="ml-auto text-[10px] text-slate-400">{mod.eps.length} endpoints</span>
+            {openMod === mod.name ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+          </button>
+          {openMod === mod.name && (
+            <div className="border-t border-slate-100">
+              {mod.eps.map((ep, j) => (
+                <div key={j} className={`flex items-center gap-3 px-4 py-2 text-xs ${j % 2 === 0 ? "bg-white" : "bg-slate-50/50"}`}>
+                  <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${methodStyle[ep[0]]}`}>{ep[0]}</span>
+                  <span className="font-mono text-slate-500 min-w-[180px]">{ep[1]}</span>
+                  <span className="text-slate-700 flex-1">{ep[2]}</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">{ep[3]}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ─── RBAC TAB ───
+function RbacTab() {
+  const permStyle = {
+    "—": "text-slate-300", "R": "text-blue-500 bg-blue-50", "RW": "text-emerald-600 bg-emerald-50 font-bold",
+    "CRUD": "text-amber-600 bg-amber-50 font-bold", "R*": "text-blue-400 bg-blue-50",
+  }
+
+  const rbac = [
+    ["Main Dashboard", "—", "—", "R", "RW", "RW"],
+    ["Operator Dashboard", "R", "—", "—", "R", "RW"],
+    ["Production Overview", "—", "R", "RW", "RW", "RW"],
+    ["Machine Detail", "R*", "RW", "RW", "RW", "RW"],
+    ["Alert Center", "R", "RW", "RW", "RW", "RW"],
+    ["T-CON Monitor", "—", "RW", "R", "RW", "RW"],
+    ["Employee List", "—", "—", "R", "RW", "CRUD"],
+    ["Attendance", "—", "—", "RW", "RW", "RW"],
+    ["Productivity", "—", "—", "R", "RW", "RW"],
+    ["Payroll", "—", "—", "—", "RW", "CRUD"],
+    ["Energy Monitor", "—", "R", "RW", "RW", "RW"],
+    ["Quality NCT", "—", "R", "RW", "RW", "RW"],
+    ["Logbook Explorer", "R", "R", "RW", "RW", "RW"],
+    ["Admin Settings", "—", "—", "—", "R", "CRUD"],
+    ["Shift Scheduler", "—", "—", "R", "RW", "CRUD"],
+  ]
+  const roles = ["Operator", "Technician", "Supervisor", "Manager", "Admin"]
+
+  const sprints = [
+    { name: "Sprint 1: Foundation", weeks: "Tuần 1-4", color: COLORS.primary, tasks: [
+      "Auth + RBAC + JWT", "Database Schema + Migration", "Data Ingestion Pipeline (xlsx import)",
+      "Main Dashboard + Machine Grid", "Operator Dashboard (tablet)", "Alert Center + 7-group classification", "Shift Management (3 ca)",
+    ]},
+    { name: "Sprint 2: Production", weeks: "Tuần 5-8", color: COLORS.success, tasks: [
+      "Production Overview + OEE", "Machine Detail (5 tabs)", "T-CON Monitor (gauge, heatmap)",
+      "Maintenance Planner", "Energy Monitor", "Quality NCT", "WebSocket real-time",
+    ]},
+    { name: "Sprint 3: HR & Payroll", weeks: "Tuần 9-12", color: COLORS.purple, tasks: [
+      "Employee CRUD + Import", "Attendance (auto from logbook)", "Productivity Scoring Engine",
+      "Payroll Calculation", "Shift Scheduler", "Report Builder", "Logbook Explorer",
+    ]},
+    { name: "Sprint 4: Launch", weeks: "Tuần 13-16", color: COLORS.warning, tasks: [
+      "Cost Analytics", "Performance Comparison", "Admin Settings",
+      "PWA + Offline", "Email/SMS alerts", "UAT + Bug fixes", "Training + Go-Live",
+    ]},
+  ]
+
+  return (
+    <div className="space-y-8">
+      {/* RBAC Matrix */}
+      <div className="rounded-xl border border-slate-200 overflow-hidden">
+        <div className="px-4 py-2.5 bg-slate-800 text-white text-sm font-semibold tracking-wide">
+          MA TRẬN PHÂN QUYỀN (RBAC)
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="px-3 py-2 text-left font-semibold text-slate-500 min-w-[160px]">Màn Hình</th>
+                {roles.map(r => <th key={r} className="px-3 py-2 text-center font-semibold text-slate-500">{r}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {rbac.map((row, i) => (
+                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50/50"}>
+                  <td className="px-3 py-2 font-medium text-slate-700">{row[0]}</td>
+                  {row.slice(1).map((perm, j) => (
+                    <td key={j} className="px-3 py-2 text-center">
+                      <span className={`px-2 py-0.5 rounded text-[10px] ${permStyle[perm] || permStyle["R"]}`}>
+                        {perm}
+                      </span>
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="px-4 py-2 bg-slate-50 text-[10px] text-slate-400 flex gap-4 border-t">
+          <span>— Không truy cập</span><span className="text-blue-500">R Chỉ xem</span>
+          <span className="text-emerald-600 font-bold">RW Xem + Sửa</span><span className="text-amber-600 font-bold">CRUD Toàn quyền</span>
+          <span className="text-blue-400">R* Chỉ máy mình</span>
+        </div>
+      </div>
+
+      {/* Roadmap */}
+      <div>
+        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Lộ Trình Triển Khai — 16 Tuần</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {sprints.map((sprint, si) => (
+            <div key={si} className="rounded-xl border border-slate-200 overflow-hidden">
+              <div className="px-4 py-3 text-white" style={{ backgroundColor: sprint.color }}>
+                <div className="text-sm font-bold">{sprint.name}</div>
+                <div className="text-xs opacity-80">{sprint.weeks} • {sprint.tasks.length} tasks</div>
+              </div>
+              <div className="p-3 space-y-1.5">
+                {sprint.tasks.map((task, ti) => (
+                  <div key={ti} className="flex items-start gap-2 text-xs text-slate-600">
+                    <div className="w-4 h-4 rounded border border-slate-300 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-[8px] text-slate-400">{ti + 1}</span>
+                    </div>
+                    {task}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── MAIN COMPONENT ───
+export default function TCMSArchitecture() {
+  const [activeTab, setActiveTab] = useState("arch")
+
+  const renderTab = () => {
+    switch (activeTab) {
+      case "arch": return <ArchTab />
+      case "db": return <DbTab />
+      case "ui": return <UiTab />
+      case "hr": return <HrTab />
+      case "api": return <ApiTab />
+      case "rbac": return <RbacTab />
+      default: return <ArchTab />
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="flex items-center gap-3 mb-1">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
+              <Factory size={20} />
+            </div>
+            <div>
+              <h1 className="text-xl font-black tracking-tight">TCMS</h1>
+              <p className="text-[11px] text-slate-400 tracking-wider">TRUTZSCHLER CARDING MANAGEMENT SYSTEM</p>
+            </div>
+            <div className="ml-auto text-right hidden md:block">
+              <div className="text-[11px] text-slate-400">9 máy TC19i + 1 TST5 • 3 ca/ngày • 30+ nhân sự</div>
+              <div className="text-[11px] text-slate-500">Architecture Document v1.0</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex gap-1 overflow-x-auto pb-0">
+            {tabs.map(({ id, label, icon: Icon }) => (
+              <button key={id} onClick={() => setActiveTab(id)}
+                className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-t-lg transition-all whitespace-nowrap ${
+                  activeTab === id
+                    ? "bg-slate-50 text-slate-800 shadow-sm"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-white/5"
+                }`}>
+                <Icon size={15} />
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="max-w-7xl mx-auto px-4 py-6">
+        {renderTab()}
+      </div>
+
+      {/* Footer */}
+      <div className="max-w-7xl mx-auto px-4 py-4 border-t border-slate-200 mt-8">
+        <div className="flex items-center justify-between text-[11px] text-slate-400">
+          <span>TCMS Architecture v1.0 — Dự án phần mềm quản lý dây chuyền chải công ty vải sợi</span>
+          <span>React + NestJS + PostgreSQL + TimescaleDB + Redis + WebSocket</span>
+        </div>
+      </div>
+    </div>
+  )
+}
