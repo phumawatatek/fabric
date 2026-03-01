@@ -10,7 +10,6 @@ export default function ProtectedLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Force fresh build v4
   const router = useRouter()
   const { user, isLoading } = useAuth()
   const [isReady, setIsReady] = useState(false)

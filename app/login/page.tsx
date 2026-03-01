@@ -16,10 +16,9 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
 
-  // Static values - don't use new Date() to avoid hydration issues
-  const currentShift = 'Shift 1'
-  const currentTime = '09:30:00'
-  const currentDate = '01/03/2026'
+  const currentShift = new Date().getHours() < 14 ? 'Shift 1' : new Date().getHours() < 22 ? 'Shift 2' : 'Shift 3'
+  const currentTime = new Date().toLocaleTimeString('vi-VN')
+  const currentDate = new Date().toLocaleDateString('vi-VN')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
