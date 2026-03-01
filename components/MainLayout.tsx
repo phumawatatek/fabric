@@ -372,7 +372,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
           <div className="flex-1"></div>
 
           <div className="flex items-center gap-4">
-            <div className="text-right text-sm text-slate-400">
+            <div className="text-right text-sm text-slate-400" suppressHydrationWarning>
               <p className="font-medium text-white">{currentTime || '...'}</p>
             </div>
           </div>
