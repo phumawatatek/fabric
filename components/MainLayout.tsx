@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
@@ -30,13 +30,13 @@ import { Button } from '@/components/ui/button'
 interface NavItem {
   label: string
   href: string
-  icon: React.ReactNode
+  icon: ReactNode
   badge?: string
   requiredRoles?: string[]
   submenu?: NavItem[]
 }
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+export default function MainLayout({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [currentTime, setCurrentTime] = useState('')
@@ -45,7 +45,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   const { user, logout } = useAuth()
 
   // Fix hydration mismatch by setting time only on client
-  React.useEffect(() => {
+  useEffect(() => {
     setCurrentTime(new Date().toLocaleString('vi-VN'))
   }, [])
 

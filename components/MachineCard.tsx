@@ -12,12 +12,16 @@ interface Props {
 export default function MachineCard({ machine, onClick }: Props) {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'hoạt động':
+      case 'Automatic mode':
         return 'bg-green-900 text-green-200 border-green-700'
-      case 'lỗi':
+      case 'Malfunction':
         return 'bg-red-900 text-red-200 border-red-700'
-      case 'bảo trì':
-        return 'bg-yellow-900 text-yellow-200 border-yellow-700'
+      case 'Maintenance':
+        return 'bg-cyan-900 text-cyan-200 border-cyan-700'
+      case 'Warning':
+        return 'bg-amber-900 text-amber-200 border-amber-700'
+      case 'Service mode':
+        return 'bg-teal-900 text-teal-200 border-teal-700'
       default:
         return 'bg-gray-900 text-gray-200 border-gray-700'
     }
@@ -25,12 +29,14 @@ export default function MachineCard({ machine, onClick }: Props) {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'hoạt động':
+      case 'Automatic mode':
         return <CheckCircle size={16} />
-      case 'lỗi':
+      case 'Malfunction':
         return <AlertCircle size={16} />
-      case 'bảo trì':
+      case 'Maintenance':
         return <Wrench size={16} />
+      case 'Warning':
+        return <AlertCircle size={16} />
       default:
         return <AlertCircle size={16} />
     }
