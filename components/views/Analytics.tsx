@@ -36,10 +36,16 @@ export default function Analytics() {
   }, [] as Array<{ name: string; value: number }>)
 
   const statusColors: { [key: string]: string } = {
-    'hoạt động': '#22c55e',
-    'lỗi': '#ef4444',
-    'bảo trì': '#eab308',
-    'dừng': '#6b7280',
+    'Automatic mode': '#22c55e',
+    'Malfunction': '#ef4444',
+    'Maintenance': '#06b6d4',
+    'Warning': '#d97706',
+    'Service mode': '#14b8a6',
+    'Manual stop': '#475569',
+    'Shift change': '#f97316',
+    'No entry': '#64748b',
+    'Information': '#3b82f6',
+    'Set value': '#8b5cf6',
   }
 
 

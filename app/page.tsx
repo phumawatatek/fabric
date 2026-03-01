@@ -1,5 +1,6 @@
-import MainLayout from '@/components/MainLayout'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-  return <MainLayout />
+  // Redirect root to login - auth is handled in (protected) group
+  redirect('/login')
 }

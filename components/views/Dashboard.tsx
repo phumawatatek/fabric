@@ -13,8 +13,8 @@ export default function Dashboard() {
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const totalProduction = machines.reduce((sum, m) => sum + m.productionRate, 0)
-  const activeCount = machines.filter(m => m.status === 'hoạt động').length
-  const errorCount = machines.filter(m => m.status === 'lỗi').length
+  const activeCount = machines.filter(m => m.status === 'Automatic mode').length
+  const errorCount = machines.filter(m => m.status === 'Malfunction').length
   const avgErrorRate = (machines.reduce((sum, m) => sum + m.errorRate, 0) / machines.length).toFixed(2)
 
   return (

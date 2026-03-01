@@ -53,14 +53,14 @@ export default function MachineDetailDialog({ machine, open, onOpenChange }: Pro
               <div>
                 <p className="text-slate-400 text-sm">Trạng Thái</p>
                 <div className="flex items-center gap-2 mt-2">
-                  {machine.status === 'hoạt động' ? (
+                  {machine.status === 'Automatic mode' ? (
                     <CheckCircle className="text-green-500" size={20} />
-                  ) : machine.status === 'lỗi' ? (
+                  ) : machine.status === 'Malfunction' ? (
                     <AlertCircle className="text-red-500" size={20} />
                   ) : (
                     <Wrench className="text-yellow-500" size={20} />
                   )}
-                  <span className="text-white font-semibold capitalize">{machine.status}</span>
+                  <span className="text-white font-semibold">{machine.status}</span>
                 </div>
               </div>
               <div>
@@ -144,7 +144,7 @@ export default function MachineDetailDialog({ machine, open, onOpenChange }: Pro
             <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={handleFixError}
-                disabled={actionLoading || machine.status !== 'lỗi'}
+                disabled={actionLoading || machine.status !== 'Malfunction'}
                 className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:cursor-not-allowed text-white px-4 py-2 rounded font-semibold transition-colors"
               >
                 <CheckCircle size={18} />
