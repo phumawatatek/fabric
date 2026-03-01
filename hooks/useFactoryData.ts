@@ -74,29 +74,29 @@ export const useFactoryData = () => {
   // Initialize data
   useEffect(() => {
     const initialMachines: Machine[] = [
-      { id: 'M1', name: 'Máy Xoắn 01', status: 'hoạt động', productionRate: 450, errorRate: 2.3, temperature: 65, rpm: 2400, lastMaintenance: '2024-02-15' },
-      { id: 'M2', name: 'Máy Xoắn 02', status: 'hoạt động', productionRate: 480, errorRate: 1.8, temperature: 62, rpm: 2400, lastMaintenance: '2024-02-18' },
-      { id: 'M3', name: 'Máy Xoắn 03', status: 'lỗi', productionRate: 150, errorRate: 8.5, temperature: 78, rpm: 1200, lastMaintenance: '2024-01-20' },
-      { id: 'M4', name: 'Máy Xoắn 04', status: 'hoạt động', productionRate: 460, errorRate: 2.1, temperature: 64, rpm: 2400, lastMaintenance: '2024-02-10' },
-      { id: 'M5', name: 'Máy Xoắn 05', status: 'bảo trì', productionRate: 0, errorRate: 0, temperature: 45, rpm: 0, lastMaintenance: '2024-02-22' },
-      { id: 'M6', name: 'Máy Xoắn 06', status: 'hoạt động', productionRate: 475, errorRate: 1.9, temperature: 63, rpm: 2400, lastMaintenance: '2024-02-12' },
-      { id: 'M7', name: 'Máy Xoắn 07', status: 'hoạt động', productionRate: 470, errorRate: 2.4, temperature: 66, rpm: 2400, lastMaintenance: '2024-02-08' },
-      { id: 'M8', name: 'Máy Xoắn 08', status: 'hoạt động', productionRate: 455, errorRate: 2.0, temperature: 64, rpm: 2400, lastMaintenance: '2024-02-14' },
-      { id: 'M9', name: 'Máy Xoắn 09', status: 'hoạt động', productionRate: 465, errorRate: 2.2, temperature: 65, rpm: 2400, lastMaintenance: '2024-02-16' },
-      { id: 'M10', name: 'Máy Xoắn 10', status: 'hoạt động', productionRate: 468, errorRate: 1.7, temperature: 62, rpm: 2400, lastMaintenance: '2024-02-19' },
+      { id: 'M1', name: 'TC19i 01', status: 'hoạt động', productionRate: 450, errorRate: 2.3, temperature: 65, rpm: 2400, lastMaintenance: '2024-02-15' },
+      { id: 'M2', name: 'TC19i 02', status: 'hoạt động', productionRate: 480, errorRate: 1.8, temperature: 62, rpm: 2400, lastMaintenance: '2024-02-18' },
+      { id: 'M3', name: 'TC19i 03', status: 'lỗi', productionRate: 150, errorRate: 8.5, temperature: 78, rpm: 1200, lastMaintenance: '2024-01-20' },
+      { id: 'M4', name: 'TC19i 04', status: 'hoạt động', productionRate: 460, errorRate: 2.1, temperature: 64, rpm: 2400, lastMaintenance: '2024-02-10' },
+      { id: 'M5', name: 'TC19i 05', status: 'bảo trì', productionRate: 0, errorRate: 0, temperature: 45, rpm: 0, lastMaintenance: '2024-02-22' },
+      { id: 'M6', name: 'TC19i 06', status: 'hoạt động', productionRate: 475, errorRate: 1.9, temperature: 63, rpm: 2400, lastMaintenance: '2024-02-12' },
+      { id: 'M7', name: 'TC19i 07', status: 'hoạt động', productionRate: 470, errorRate: 2.4, temperature: 66, rpm: 2400, lastMaintenance: '2024-02-08' },
+      { id: 'M8', name: 'TC19i 08', status: 'hoạt động', productionRate: 455, errorRate: 2.0, temperature: 64, rpm: 2400, lastMaintenance: '2024-02-14' },
+      { id: 'M9', name: 'TC19i 09', status: 'hoạt động', productionRate: 465, errorRate: 2.2, temperature: 65, rpm: 2400, lastMaintenance: '2024-02-16' },
+      { id: 'M10', name: 'TST5 01', status: 'hoạt động', productionRate: 468, errorRate: 1.7, temperature: 62, rpm: 2400, lastMaintenance: '2024-02-19' },
     ]
 
     const initialWorstMachines: WorstMachine[] = [
-      { id: 'M3', name: 'Máy Xoắn 03', errorRate: 8.5, downtime: 240, lastFixed: '2024-01-20' },
-      { id: 'M5', name: 'Máy Xoắn 05', errorRate: 5.2, downtime: 180, lastFixed: '2024-02-22' },
-      { id: 'M7', name: 'Máy Xoắn 07', errorRate: 4.1, downtime: 120, lastFixed: '2024-02-08' },
-      { id: 'M1', name: 'Máy Xoắn 01', errorRate: 2.3, downtime: 60, lastFixed: '2024-02-15' },
-      { id: 'M2', name: 'Máy Xoắn 02', errorRate: 1.8, downtime: 45, lastFixed: '2024-02-18' },
-      { id: 'M4', name: 'Máy Xoắn 04', errorRate: 2.1, downtime: 50, lastFixed: '2024-02-10' },
-      { id: 'M6', name: 'Máy Xoắn 06', errorRate: 1.9, downtime: 40, lastFixed: '2024-02-12' },
-      { id: 'M8', name: 'Máy Xoắn 08', errorRate: 2.0, downtime: 48, lastFixed: '2024-02-14' },
-      { id: 'M9', name: 'Máy Xoắn 09', errorRate: 2.2, downtime: 55, lastFixed: '2024-02-16' },
-      { id: 'M10', name: 'Máy Xoắn 10', errorRate: 1.7, downtime: 35, lastFixed: '2024-02-19' },
+      { id: 'M3', name: 'TC19i 03', errorRate: 8.5, downtime: 240, lastFixed: '2024-01-20' },
+      { id: 'M5', name: 'TC19i 05', errorRate: 5.2, downtime: 180, lastFixed: '2024-02-22' },
+      { id: 'M7', name: 'TC19i 07', errorRate: 4.1, downtime: 120, lastFixed: '2024-02-08' },
+      { id: 'M1', name: 'TC19i 01', errorRate: 2.3, downtime: 60, lastFixed: '2024-02-15' },
+      { id: 'M2', name: 'TC19i 02', errorRate: 1.8, downtime: 45, lastFixed: '2024-02-18' },
+      { id: 'M4', name: 'TC19i 04', errorRate: 2.1, downtime: 50, lastFixed: '2024-02-10' },
+      { id: 'M6', name: 'TC19i 06', errorRate: 1.9, downtime: 40, lastFixed: '2024-02-12' },
+      { id: 'M8', name: 'TC19i 08', errorRate: 2.0, downtime: 48, lastFixed: '2024-02-14' },
+      { id: 'M9', name: 'TC19i 09', errorRate: 2.2, downtime: 55, lastFixed: '2024-02-16' },
+      { id: 'M10', name: 'TST5 01', errorRate: 1.7, downtime: 35, lastFixed: '2024-02-19' },
     ]
 
     const initialHRData: HRData[] = [
@@ -152,16 +152,16 @@ export const useFactoryData = () => {
     ]
 
     const initialAlarms = [
-      { id: 'A1', machine: 'Máy Xoắn 03', type: 'Quá nhiệt độ', time: '14:25' },
-      { id: 'A2', machine: 'Máy Xoắn 05', type: 'Bảo trì cần thiết', time: '13:50' },
-      { id: 'A3', machine: 'Máy Xoắn 01', type: 'Lỗi cảm biến', time: '12:30' },
-      { id: 'A4', machine: 'Máy Xoắn 07', type: 'Lỗi motor', time: '11:45' },
-      { id: 'A5', machine: 'Máy Xoắn 04', type: 'Áp suất thấp', time: '10:20' },
-      { id: 'A6', machine: 'Máy Xoắn 09', type: 'Rung động bất thường', time: '09:15' },
-      { id: 'A7', machine: 'Máy Xoắn 02', type: 'Lỗi điều khiển', time: '08:40' },
-      { id: 'A8', machine: 'Máy Xoắn 06', type: 'Hết nước', time: '08:10' },
-      { id: 'A9', machine: 'Máy Xoắn 08', type: 'Lỗi encoder', time: '07:55' },
-      { id: 'A10', machine: 'Máy Xoắn 10', type: 'Nhiệt độ thấp', time: '07:20' },
+      { id: 'A1', machine: 'TC19i 03', type: 'Quá nhiệt độ', time: '14:25' },
+      { id: 'A2', machine: 'TC19i 05', type: 'Bảo trì cần thiết', time: '13:50' },
+      { id: 'A3', machine: 'TC19i 01', type: 'Lỗi cảm biến', time: '12:30' },
+      { id: 'A4', machine: 'TC19i 07', type: 'Lỗi motor', time: '11:45' },
+      { id: 'A5', machine: 'TC19i 04', type: 'Áp suất thấp', time: '10:20' },
+      { id: 'A6', machine: 'TC19i 09', type: 'Rung động bất thường', time: '09:15' },
+      { id: 'A7', machine: 'TC19i 02', type: 'Lỗi điều khiển', time: '08:40' },
+      { id: 'A8', machine: 'TC19i 06', type: 'Hết nước', time: '08:10' },
+      { id: 'A9', machine: 'TC19i 08', type: 'Lỗi encoder', time: '07:55' },
+      { id: 'A10', machine: 'TST5 01', type: 'Nhiệt độ thấp', time: '07:20' },
     ]
 
     setMachines(initialMachines)
