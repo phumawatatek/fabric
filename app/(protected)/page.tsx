@@ -22,6 +22,7 @@ import {
 } from 'recharts'
 
 export default function DashboardPage() {
+  // Force fresh build - v3
   const { machines } = useFactoryData()
   const { user } = useAuth()
 
