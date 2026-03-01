@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, ReactNode } from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/lib/auth-context'
@@ -39,9 +39,15 @@ interface NavItem {
 export default function MainLayout({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [currentTime, setCurrentTime] = useState('')
   const router = useRouter()
   const pathname = usePathname()
   const { user, logout } = useAuth()
+
+  // Fix hydration mismatch by setting time only on client
+  useEffect(() => {
+    setCurrentTime(new Date().toLocaleString('vi-VN'))
+  }, [])
 
   const handleLogout = () => {
     logout()
@@ -367,7 +373,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
 
           <div className="flex items-center gap-4">
             <div className="text-right text-sm text-slate-400">
-              <span className="text-green-400 font-semibold">● Hệ thống hoạt động</span>
+              <p className="font-medium text-white">{currentTime || '...'}</p>
             </div>
           </div>
         </header>
