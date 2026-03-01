@@ -39,9 +39,15 @@ interface NavItem {
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [currentTime, setCurrentTime] = useState('')
   const router = useRouter()
   const pathname = usePathname()
   const { user, logout } = useAuth()
+
+  // Fix hydration mismatch by setting time only on client
+  React.useEffect(() => {
+    setCurrentTime(new Date().toLocaleString('vi-VN'))
+  }, [])
 
   const handleLogout = () => {
     logout()
@@ -367,7 +373,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
           <div className="flex items-center gap-4">
             <div className="text-right text-sm text-slate-400">
-              <p className="font-medium text-white">{new Date().toLocaleString('vi-VN')}</p>
+              <p className="font-medium text-white">{currentTime || '...'}</p>
             </div>
           </div>
         </header>

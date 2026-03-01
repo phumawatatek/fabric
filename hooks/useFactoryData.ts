@@ -11,6 +11,11 @@ export interface Machine {
   temperature: number
   rpm: number
   lastMaintenance: string
+  voltage: number
+  current: number
+  power: number
+  vibration: number
+  uptime: number
 }
 
 export interface WorstMachine {
@@ -74,16 +79,16 @@ export const useFactoryData = () => {
   // Initialize data
   useEffect(() => {
     const initialMachines: Machine[] = [
-      { id: 'M1', name: 'TC19i 01', status: 'Automatic mode', productionRate: 450, errorRate: 2.3, temperature: 65, rpm: 2400, lastMaintenance: '2024-02-15' },
-      { id: 'M2', name: 'TC19i 02', status: 'Automatic mode', productionRate: 480, errorRate: 1.8, temperature: 62, rpm: 2400, lastMaintenance: '2024-02-18' },
-      { id: 'M3', name: 'TC19i 03', status: 'Malfunction', productionRate: 150, errorRate: 8.5, temperature: 78, rpm: 1200, lastMaintenance: '2024-01-20' },
-      { id: 'M4', name: 'TC19i 04', status: 'Automatic mode', productionRate: 460, errorRate: 2.1, temperature: 64, rpm: 2400, lastMaintenance: '2024-02-10' },
-      { id: 'M5', name: 'TC19i 05', status: 'Maintenance', productionRate: 0, errorRate: 0, temperature: 45, rpm: 0, lastMaintenance: '2024-02-22' },
-      { id: 'M6', name: 'TC19i 06', status: 'Automatic mode', productionRate: 475, errorRate: 1.9, temperature: 63, rpm: 2400, lastMaintenance: '2024-02-12' },
-      { id: 'M7', name: 'TC19i 07', status: 'Warning', productionRate: 470, errorRate: 2.4, temperature: 66, rpm: 2400, lastMaintenance: '2024-02-08' },
-      { id: 'M8', name: 'TC19i 08', status: 'Automatic mode', productionRate: 455, errorRate: 2.0, temperature: 64, rpm: 2400, lastMaintenance: '2024-02-14' },
-      { id: 'M9', name: 'TC19i 09', status: 'Service mode', productionRate: 465, errorRate: 2.2, temperature: 65, rpm: 2400, lastMaintenance: '2024-02-16' },
-      { id: 'M10', name: 'TST5 01', status: 'Automatic mode', productionRate: 468, errorRate: 1.7, temperature: 62, rpm: 2400, lastMaintenance: '2024-02-19' },
+      { id: 'M1', name: 'TC19i 01', status: 'Automatic mode', productionRate: 450, errorRate: 2.3, temperature: 65, rpm: 2400, lastMaintenance: '2024-02-15', voltage: 380, current: 45, power: 15.2, vibration: 2.1, uptime: 0.94 },
+      { id: 'M2', name: 'TC19i 02', status: 'Automatic mode', productionRate: 480, errorRate: 1.8, temperature: 62, rpm: 2400, lastMaintenance: '2024-02-18', voltage: 380, current: 48, power: 16.1, vibration: 1.8, uptime: 0.97 },
+      { id: 'M3', name: 'TC19i 03', status: 'Malfunction', productionRate: 150, errorRate: 8.5, temperature: 78, rpm: 1200, lastMaintenance: '2024-01-20', voltage: 350, current: 25, power: 8.2, vibration: 5.6, uptime: 0.42 },
+      { id: 'M4', name: 'TC19i 04', status: 'Automatic mode', productionRate: 460, errorRate: 2.1, temperature: 64, rpm: 2400, lastMaintenance: '2024-02-10', voltage: 380, current: 46, power: 15.8, vibration: 2.3, uptime: 0.96 },
+      { id: 'M5', name: 'TC19i 05', status: 'Maintenance', productionRate: 0, errorRate: 0, temperature: 45, rpm: 0, lastMaintenance: '2024-02-22', voltage: 0, current: 0, power: 0, vibration: 0, uptime: 0 },
+      { id: 'M6', name: 'TC19i 06', status: 'Automatic mode', productionRate: 475, errorRate: 1.9, temperature: 63, rpm: 2400, lastMaintenance: '2024-02-12', voltage: 380, current: 47, power: 15.9, vibration: 2.0, uptime: 0.95 },
+      { id: 'M7', name: 'TC19i 07', status: 'Warning', productionRate: 470, errorRate: 2.4, temperature: 66, rpm: 2400, lastMaintenance: '2024-02-08', voltage: 375, current: 47, power: 15.6, vibration: 3.2, uptime: 0.93 },
+      { id: 'M8', name: 'TC19i 08', status: 'Automatic mode', productionRate: 455, errorRate: 2.0, temperature: 64, rpm: 2400, lastMaintenance: '2024-02-14', voltage: 380, current: 45, power: 15.3, vibration: 1.9, uptime: 0.96 },
+      { id: 'M9', name: 'TC19i 09', status: 'Service mode', productionRate: 465, errorRate: 2.2, temperature: 65, rpm: 2400, lastMaintenance: '2024-02-16', voltage: 380, current: 46, power: 15.5, vibration: 2.2, uptime: 0.88 },
+      { id: 'M10', name: 'TST5 01', status: 'Automatic mode', productionRate: 468, errorRate: 1.7, temperature: 62, rpm: 2400, lastMaintenance: '2024-02-19', voltage: 380, current: 47, power: 15.8, vibration: 1.7, uptime: 0.98 },
     ]
 
     const initialWorstMachines: WorstMachine[] = [
